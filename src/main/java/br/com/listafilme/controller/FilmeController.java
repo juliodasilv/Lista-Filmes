@@ -33,9 +33,8 @@ public class FilmeController {
 		return "listafilmes";
 	}
 
-	@RequestMapping(value = "/detalhe",method = RequestMethod.GET)
+	@GetMapping("/detalhe")
 	public String detalhe(@RequestParam("id") String id,ModelMap model) {
-
 		Filme filme = service.findById(id);
 		model.addAttribute("seriado",filme);
 		int totalAtores = 0;

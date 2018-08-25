@@ -7,14 +7,21 @@
 	</head>
 	<body>
 		<div class="container">
-			<img src="/images/tv.png" alt="logo" width="100" />
-			<h1>Lista de Filmes</h1>
+<!-- 			<div class="class=" btn btn-primary btn-lg" role="alert"></div> -->
+			<img src="${pageContext.request.contextPath}/resources/tv.png" alt="logo" width="100" />
+			<h1>Cadastro de Filme</h1>
 			<br />
 			<div id="listaFilmes">
 				<table class="table table-hover">
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th>Nome</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
 					<tr th:each="filme : ${filmes}">
 						<td><span th:text="${filme.nome}"></span></td>
 					</tr>
+	
 				</table>
 			</div>
 			<div align="center">
