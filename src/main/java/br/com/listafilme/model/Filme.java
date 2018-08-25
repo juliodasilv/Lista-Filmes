@@ -1,11 +1,16 @@
 package br.com.listafilme.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document(collection = "filmes")
 public class Filme implements Serializable {
@@ -19,7 +24,11 @@ public class Filme implements Serializable {
 	private String nomeOriginal;
 	private String sinopse;
 	private Double notaImdb;
-	private List<String> atores;
+	
+	@JsonIgnore
+	private String atoresString;
+	
+	private List<String> atores = new ArrayList<>();
 
 	public ObjectId getId() {
 		return id;
@@ -54,7 +63,7 @@ public class Filme implements Serializable {
 	}
 
 	public List<String> getAtores() {
-		return atores;
+		return Arrays.asList(atoresString.trim().split(","));
 	}
 
 	public void setAtores(List<String> atores) {
@@ -67,6 +76,16 @@ public class Filme implements Serializable {
 
 	public void setNotaImdb(Double notaImdb) {
 		this.notaImdb = notaImdb;
+	}
+
+	public String getAtoresString() {
+		StringBuilder sb = new StringBuilder();
+		atores.forEach(s -> sb.append(s).append(","));
+		return removeLastCharOptional(sb.toString());
+	}
+
+	public void setAtoresString(String atoresString) {
+		this.atoresString = atoresString;
 	}
 
 	@Override
@@ -98,5 +117,12 @@ public class Filme implements Serializable {
 		return "Filme [id=" + id + ", nome=" + nome + ", nomeOriginal=" + nomeOriginal + ", sinopse=" + sinopse
 				+ ", notaImdb=" + notaImdb + ", atores=" + atores + "]";
 	}
+	
+	private String removeLastCharOptional(String s) {
+	    return Optional.ofNullable(s)
+	      .filter(str -> str.length() != 0)
+	      .map(str -> str.substring(0, str.length() - 1))
+	      .orElse(s);
+	    }
 
 }

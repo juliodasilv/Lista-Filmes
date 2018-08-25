@@ -24,4 +24,8 @@ public class FilmeService {
 		return repository.findById(id);
 	}
 
+	public void insert(Filme filme) {
+		repository.insert(filme);
+	}
+
 }

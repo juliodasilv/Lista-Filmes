@@ -9,7 +9,10 @@ Collection...: *filmes*
 db.filmes.insert({  
    "nome":"O clube da luta",
    "nomeOriginal":"Fight club",
-   "sinopse":"Um homem deprimido que sofre de insônia conhece um estranho vendedor chamado Tyler Durden e se vê morando em uma casa suja depois que seu perfeito apartamento é destruído. A dupla forma um clube com regras rígidas onde homens lutam. A parceria perfeita é comprometida quando uma mulher, Marla, atrai a atenção de Tyler.",
+   "sinopse":"Um homem deprimido que sofre de insônia conhece um estranho vendedor chamado Tyler Durden
+    e se vê morando em uma casa suja depois que seu perfeito apartamento é destruído. A dupla forma um
+     clube com regras rígidas onde homens lutam. A parceria perfeita é comprometida quando uma mulher, 
+     Marla, atrai a atenção de Tyler.",
    "nomtaImdb":8.8,
    "atores":[  
       "Edward Norton",

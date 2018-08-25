@@ -1,12 +1,16 @@
 package br.com.listafilme.controller;
 
+import java.util.Arrays;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.listafilme.model.Filme;
@@ -20,17 +24,19 @@ public class FilmeController {
 	
 	@Autowired
 	private FilmeService service;
-	
-	@RequestMapping("/")
-	public String index(){
-		return "index";
+
+
+	@GetMapping("/filme/cadastrar")
+	public String cadastroFilmes(Model model){
+		model.addAttribute("filme", new Filme()); 
+		return "filme/cadastrar";
 	}
 	
-	@GetMapping("/filmes")
+	@GetMapping("/filme/listar")
 	public String listaFilmes(Model model){
 		Iterable<Filme> filmes = service.findAll();
 		model.addAttribute("filmes", filmes);
-		return "listafilmes";
+		return "filme/listar";
 	}
 
 	@GetMapping("/detalhe")
@@ -75,24 +81,14 @@ public class FilmeController {
 //	public String novo() {
 //		return "novo";
 //	}
-//
-//	@RequestMapping(value = "/adicionar",method = RequestMethod.POST)
-//	public String adicionar(@ModelAttribute Seriado seriado,ModelMap model,HttpServletRequest request) {
-//		List<String> personagens = new ArrayList<String>();
-//		personagens.add(request.getParameter("personagem1"));
-//		personagens.add(request.getParameter("personagem2"));
-//		personagens.add(request.getParameter("personagem3"));
-//		personagens.add(request.getParameter("personagem4"));
-//		personagens.add(request.getParameter("personagem5"));
-//		personagens.add(request.getParameter("personagem6"));
-//		seriado.setPersonagens(personagens);
-//
-//		repository.insert(seriado);
-//		model.addAttribute("msg","add");
-//
-//		return "novo";
-//	}
-//	
+
+	@PostMapping("/filme/salvar")
+	public String adicionar(@ModelAttribute Filme filme, ModelMap model) {
+		service.insert(filme);
+		model.addAttribute("msg","add");
+		return "filme/listar";
+	}
+	
 //	@RequestMapping(value = "salvar", method = RequestMethod.POST )
 //	public String salvar(@RequestParam("nome") String nome, @RequestParam("email")String email, 
 //			@RequestParam("telefone") String telefone, Model model){
