@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>lista Filmes</title>
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	</head>
 	<body class="grey lighten-3">
 		<div class="container">
@@ -11,7 +11,11 @@
 			<h1 class="main-title center">Cadastrar Filme</h1>			
 			<form class="col s12" action="#" th:action="@{/filme/salvar}" th:object="${filme}" method="post">
 				<div class="section">
+					<hr/>
+					
 					<h5>Dados Básicos</h5>
+					
+			
 					<div class="row">
 						<div class="input-field col s12">
 				        	<input id="nome" type="text" th:field="*{nome}" />
